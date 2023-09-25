@@ -1,0 +1,413 @@
+Using pre-set license
+Built from '2022.3/staging' branch; Version is '2022.3.2f1 (d74737c6db50) revision 14108471'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22621) 64bit Core' Language: 'en' Physical Memory: 31941 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.3.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker3
+-projectPath
+C:/Portfolio/Games/Unity/Dabih
+-logFile
+Logs/AssetImportWorker3.log
+-srvPort
+62941
+Successfully changed project path to: C:/Portfolio/Games/Unity/Dabih
+C:/Portfolio/Games/Unity/Dabih
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [24148] Host "[IP] 25.19.80.6 [Port] 0 [Flags] 2 [Guid] 413927334 [EditorId] 413927334 [Version] 1048832 [Id] WindowsEditor(7,Pathfinder) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [24148] Host "[IP] 25.19.80.6 [Port] 0 [Flags] 2 [Guid] 413927334 [EditorId] 413927334 [Version] 1048832 [Id] WindowsEditor(7,Pathfinder) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 8.32 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.2f1 (d74737c6db50)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Portfolio/Games/Unity/Dabih/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3070 Ti Laptop GPU (ID=0x24e0)
+    Vendor:   NVIDIA
+    VRAM:     8032 MB
+    Driver:   31.0.15.3713
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56404
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.005849 seconds.
+- Loaded All Assemblies, in  0.294 seconds
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 289 ms
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.571 seconds
+Domain Reload Profiling: 864ms
+	BeginReloadAssembly (70ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (27ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (51ms)
+	LoadAllAssembliesAndSetupDomain (136ms)
+		LoadAssemblies (69ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (131ms)
+			TypeCache.Refresh (130ms)
+				TypeCache.ScanAssembly (119ms)
+			ScanForSourceGeneratedMonoScriptInfo (1ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (572ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (518ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (396ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (79ms)
+			ProcessInitializeOnLoadMethodAttributes (38ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Portfolio\Games\Unity\Dabih\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Portfolio\Games\Unity\Dabih\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+- Loaded All Assemblies, in  0.767 seconds
+Refreshing native plugins compatible for Editor in 2.48 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.677 seconds
+Domain Reload Profiling: 1442ms
+	BeginReloadAssembly (114ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (23ms)
+	RebuildCommonClasses (35ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (39ms)
+	LoadAllAssembliesAndSetupDomain (569ms)
+		LoadAssemblies (273ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (340ms)
+			TypeCache.Refresh (308ms)
+				TypeCache.ScanAssembly (294ms)
+			ScanForSourceGeneratedMonoScriptInfo (23ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (677ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (498ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (22ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (75ms)
+			ProcessInitializeOnLoadAttributes (336ms)
+			ProcessInitializeOnLoadMethodAttributes (57ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (5ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 3.55 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5961 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 91 unused Assets / (0.6 MB). Loaded Objects now: 6448.
+Memory consumption went from 252.1 MB to 251.4 MB.
+Total: 5.765600 ms (FindLiveObjects: 0.751800 ms CreateObjectMapping: 0.549900 ms MarkObjects: 4.018600 ms  DeleteObjects: 0.444100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 557482.133209 seconds.
+  path: Assets/Imports/StarterAssets/Environment/Prefabs/Box_350x250x300_Prefab.prefab
+  artifactKey: Guid(687dbafc2b84b2846b9a4a7a7dae2a7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/StarterAssets/Environment/Prefabs/Box_350x250x300_Prefab.prefab using Guid(687dbafc2b84b2846b9a4a7a7dae2a7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94c964aa5e37b7a930b0224750d3bf3d') in 0.015453 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 565.939419 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Meshes/Mesh_Cliff_Sediment_03_Out_AS.FBX
+  artifactKey: Guid(ac8d1c3e46114654e9420a669da040b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Meshes/Mesh_Cliff_Sediment_03_Out_AS.FBX using Guid(ac8d1c3e46114654e9420a669da040b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b63e3a4a70f4e0346b90945d9c3f2e0a') in 0.003770 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 19
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Meshes/Mesh_Cliff_Sediment_03_Taper_AS.FBX
+  artifactKey: Guid(781b94f4b782b7d4daa3a841bdc44cba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Meshes/Mesh_Cliff_Sediment_03_Taper_AS.FBX using Guid(781b94f4b782b7d4daa3a841bdc44cba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f9a3bb8a0e46e883d7820e7811562a4') in 0.003859 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 24
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Meshes/Mesh_Cliff_Sediment_04_Taper_AS.FBX
+  artifactKey: Guid(ea8eea56cfc5e1041923b4b782db3ce6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Meshes/Mesh_Cliff_Sediment_04_Taper_AS.FBX using Guid(ea8eea56cfc5e1041923b4b782db3ce6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd23da62814c0ad8eeb2ba58b8413d0fc') in 0.002874 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 24
+========================================================================
+Received Import Request.
+  Time since last request: 18.621260 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Details/Texture_Deer_Skull_Occlusion_01.png
+  artifactKey: Guid(51696435d4e2d7240a62ba03a9a1c605) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Details/Texture_Deer_Skull_Occlusion_01.png using Guid(51696435d4e2d7240a62ba03a9a1c605) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6c68771333a181beba77e088cb4595b9') in 0.003896 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Details/Texture_Detail_Rocks_Normals_01.png
+  artifactKey: Guid(68f3a0f91c2d98245850539d8ea86d32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Details/Texture_Detail_Rocks_Normals_01.png using Guid(68f3a0f91c2d98245850539d8ea86d32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1acd5aec41c2ed4f4a03c1775fcd21e1') in 0.002407 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 3.675256 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Erosion_Cuts_01_Normals.png
+  artifactKey: Guid(4606bff5cc9abe04ca6f1aa1ff8c68e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Erosion_Cuts_01_Normals.png using Guid(4606bff5cc9abe04ca6f1aa1ff8c68e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f3ef247247f8f397f82585747a439de') in 0.001305 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000843 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Erosion_Cuts_02_Color.png
+  artifactKey: Guid(b44c92900f87f304d99917eeb99e633a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Erosion_Cuts_02_Color.png using Guid(b44c92900f87f304d99917eeb99e633a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '399a1a94aad1035fabfb453da0d32419') in 0.002269 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Erosion_Cuts_03_Normals.png
+  artifactKey: Guid(ada7924349430d84a9423f5de2f57992) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Erosion_Cuts_03_Normals.png using Guid(ada7924349430d84a9423f5de2f57992) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6aa55833487d4ad28682fad0e4f7e672') in 0.001160 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.023932 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_01_Color.png
+  artifactKey: Guid(bfb419e520fbc0b45b9161a796a1c901) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_01_Color.png using Guid(bfb419e520fbc0b45b9161a796a1c901) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc8386f8ec7ea2a44d9a314150578547') in 0.002254 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_05_Mask.png
+  artifactKey: Guid(5411bb84c765ccf47b2284873a686754) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_05_Mask.png using Guid(5411bb84c765ccf47b2284873a686754) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6882ed2b10cb4de9a179606a4019b76d') in 0.001712 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_05_Color.png
+  artifactKey: Guid(ddfd61f92a26c0544968bf52aa3ec9c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_05_Color.png using Guid(ddfd61f92a26c0544968bf52aa3ec9c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '083569bb5ea656990775e4574d2d6bfa') in 0.001538 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_08_Color.png
+  artifactKey: Guid(f5d866f633ac41545a7c23295d42293b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_08_Color.png using Guid(f5d866f633ac41545a7c23295d42293b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34f4900b1ec711f88c4cee149c00cd6f') in 0.002272 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_06_Color.png
+  artifactKey: Guid(c962e145914216f42a6842e75b793b6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_06_Color.png using Guid(c962e145914216f42a6842e75b793b6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d5c971220aa4eefcbc0a4a375fc3d7c') in 0.001351 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000207 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_01_Normals.png
+  artifactKey: Guid(2483ca2407828fb4287f6c5a8c5eb1f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_01_Normals.png using Guid(2483ca2407828fb4287f6c5a8c5eb1f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b800d16979dfdfbf8c43fac583923b55') in 0.001349 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_08_Normals.png
+  artifactKey: Guid(59bb88b5e588f4f4dafdf9a7287eb6dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_08_Normals.png using Guid(59bb88b5e588f4f4dafdf9a7287eb6dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55fe600843e2ab3c859c75a329e2cac0') in 0.001364 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_08_Mask.png
+  artifactKey: Guid(d1e3190a658520643ad1b5b7d1f14962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_08_Mask.png using Guid(d1e3190a658520643ad1b5b7d1f14962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2adb9f4fb2ad2c0a4e736512b1999afb') in 0.001391 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_07_Mask.png
+  artifactKey: Guid(8bce22a65776f9b479d34221208fef38) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Rock_Outcropping_07_Mask.png using Guid(8bce22a65776f9b479d34221208fef38) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e92cf6c407300396870ddc966007b3f') in 0.001190 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.035896 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Weed_Patch_03_Color.png
+  artifactKey: Guid(ef1f6b7d8e29a8f4bbd9827bd844e5f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Weed_Patch_03_Color.png using Guid(ef1f6b7d8e29a8f4bbd9827bd844e5f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88cd70ca7cb744d2b72efc51cfc43a78') in 0.001283 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Imports/Castle Valley Collection 1/Textures/Decals/Weed_Patch_03_Normals.png
+  artifactKey: Guid(cb005626720ccef4a844cdf687f5b5af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/Castle Valley Collection 1/Textures/Decals/Weed_Patch_03_Normals.png using Guid(cb005626720ccef4a844cdf687f5b5af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8abc0ba095778b85a7cdfc1bee97b962') in 0.001452 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Portfolio\Games\Unity\Dabih\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Portfolio\Games\Unity\Dabih\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+- Loaded All Assemblies, in  0.644 seconds
+Refreshing native plugins compatible for Editor in 2.42 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.985 seconds
+Domain Reload Profiling: 1627ms
+	BeginReloadAssembly (125ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (40ms)
+	RebuildCommonClasses (25ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (28ms)
+	LoadAllAssembliesAndSetupDomain (456ms)
+		LoadAssemblies (242ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (262ms)
+			TypeCache.Refresh (254ms)
+				TypeCache.ScanAssembly (241ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (985ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (500ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (22ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (76ms)
+			ProcessInitializeOnLoadAttributes (323ms)
+			ProcessInitializeOnLoadMethodAttributes (69ms)
+			AfterProcessingInitializeOnLoad (6ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+Refreshing native plugins compatible for Editor in 4.95 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5787 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 45 unused Assets / (0.6 MB). Loaded Objects now: 6465.
+Memory consumption went from 218.7 MB to 218.1 MB.
+Total: 5.848300 ms (FindLiveObjects: 0.891700 ms CreateObjectMapping: 0.737400 ms MarkObjects: 3.878100 ms  DeleteObjects: 0.329100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: The I/O operation has been aborted because of either a thread exit or an application request.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
