@@ -7,12 +7,13 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform target;
+    [SerializeField] float turnSpeed = 5f;
     [SerializeField] float chaseRange = 5f;
-    [SerializeField] float meleeRange = 1f;
     [SerializeField] float shootingRange = 30f;
 
     NavMeshAgent agent;
     Animator animator;
+    EnemyHealth health;
     float distanceToTarget = Mathf.Infinity;
     bool chasingTarget;
     bool isProvoked;
@@ -21,69 +22,97 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        health = GetComponent<EnemyHealth>();
     }
 
     void Update()
     {
-        distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-        if (isProvoked)
+        ResetAnims();
+        if (!health.GetIsAlive())
         {
-            EngageTarget();
+            agent.isStopped = true;
         }
-        else if (distanceToTarget < chaseRange)
+        else
         {
-            isProvoked = true;
-        }
+            distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-        if (distanceToTarget > 30f)
-        {
-            isProvoked = false;
-        }
+            if (isProvoked)
+            {
+                EngageTarget();
+            }
+            else if (distanceToTarget < chaseRange)
+            {
+                isProvoked = true;
+            }
 
-        if (agent.velocity == Vector3.zero)
-        {
-            chasingTarget = false;
-        }
+            if (distanceToTarget > 30f)
+            {
+                isProvoked = false;
+            }
 
-        if (!chasingTarget)
-        {
-            animator.SetBool("IsWalking", false);
+            if (chasingTarget)
+            {
+                animator.SetFloat("Speed", agent.speed);
+                animator.SetBool("IsWalking", true);
+            }
+
+            if (agent.velocity == Vector3.zero)
+            {
+                chasingTarget = false;
+            }
         }
     }
 
     private void EngageTarget()
     {
-        if (distanceToTarget >= agent.stoppingDistance)
+        FaceTarget();
+        if (distanceToTarget <= agent.stoppingDistance)
+        {
+            AttackTargetMelee();
+        }
+        else if (distanceToTarget <= shootingRange)
+        {
+            AttackTargetRanged();
+        }
+        else if (distanceToTarget >= agent.stoppingDistance)
         {
             ChaseTarget();
         }
-        else if (distanceToTarget <= agent.stoppingDistance)
-        {
-            animator.SetBool("IsMelee", true);
-            Debug.Log("Hit");
-            //StartCoroutine(AttackTargetMelee());
-            //animator.SetBool("IsMelee", false);
-        }
     }
 
-    private IEnumerator AttackTargetMelee()
+    private void AttackTargetMelee()
     {
         animator.SetBool("IsMelee", true);
-        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        agent.ResetPath();
+    }
 
-        if (state.IsName("2HitComboAssaultRifle"))
-        {
-            yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
-        }
-        Debug.Log("Hit");
+    private void AttackTargetRanged()
+    {
+        animator.SetBool("IsShooting", true);
+        agent.ResetPath();
     }
 
     private void ChaseTarget()
     {
         agent.SetDestination(target.position);
+        animator.SetFloat("Speed", agent.speed);
         animator.SetBool("IsWalking", true);
         chasingTarget = true;
+    }
+
+    private void FaceTarget()
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
+    }
+
+    private void ResetAnims()
+    {
+        animator.SetBool("IsMelee", false);
+        animator.SetBool("IsShooting", false);
+        animator.SetBool("IsWalking", false);
+        animator.SetFloat("Speed", 0);
     }
 
     private void OnDrawGizmosSelected()

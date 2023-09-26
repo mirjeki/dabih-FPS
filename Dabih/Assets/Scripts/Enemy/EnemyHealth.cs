@@ -6,12 +6,19 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float health = 100;
-    [SerializeField] float deathTimer = 1f;
+    [SerializeField] float deathTimer = 4f;
+    Animator animator;
     bool isAlive;
 
     void Start()
     {
         isAlive = true;
+        animator = GetComponent<Animator>();
+    }
+
+    public bool GetIsAlive()
+    {
+        return isAlive;
     }
 
     public void TakeDamage(float damage)
@@ -26,8 +33,9 @@ public class EnemyHealth : MonoBehaviour
 
     private void ProcessDeath()
     {
-        if (isAlive &&  health <= 0) 
+        if (isAlive && health <= 0) 
         {
+            isAlive = false;
             StartCoroutine(Die());
         }
     }
@@ -36,8 +44,7 @@ public class EnemyHealth : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(deathTimer);
 
-        isAlive = false;
-        //play death animation
-        Destroy(gameObject);
+        animator.SetTrigger("Die");
+        //Destroy(gameObject);
     }
 }
