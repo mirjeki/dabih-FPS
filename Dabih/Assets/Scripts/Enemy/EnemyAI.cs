@@ -1,28 +1,40 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] Transform target;
     [SerializeField] float turnSpeed = 5f;
     [SerializeField] float chaseRange = 5f;
+    [SerializeField] float meleeRange = 6f;
     [SerializeField] float shootingRange = 30f;
+    [SerializeField] bool hasRangedAttack;
+    [SerializeField] bool hasMeleeAttack;
+    [SerializeField] float stumbleGracePeriod = 0.5f;
+    [SerializeField] FieldOfView fieldOfView = new FieldOfView(20f, 60f);
 
+    Transform target;
+    bool currentTargetIsVisible;
     NavMeshAgent agent;
     Animator animator;
     EnemyHealth health;
+    float stumbleDelay;
     float distanceToTarget = Mathf.Infinity;
     bool chasingTarget;
     bool isProvoked;
+    bool isMoving;
+    bool isStumbling;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         health = GetComponent<EnemyHealth>();
+        target = FindObjectOfType<PlayerHealth>().transform;
+        InvokeRepeating(nameof(CheckTargets), 0.5f, 0.5f);
     }
 
     void Update()
@@ -36,29 +48,39 @@ public class EnemyAI : MonoBehaviour
         {
             distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-            if (isProvoked)
+            if (chasingTarget && distanceToTarget < chaseRange)
+            {
+                ChaseTarget();
+            }
+
+            if (isProvoked && !isStumbling)
             {
                 EngageTarget();
             }
-            else if (distanceToTarget < chaseRange)
+            else if (distanceToTarget < fieldOfView.Radius && currentTargetIsVisible)
             {
                 isProvoked = true;
             }
 
-            if (distanceToTarget > 30f)
+            if (distanceToTarget > chaseRange && !currentTargetIsVisible)
             {
                 isProvoked = false;
-            }
-
-            if (chasingTarget)
-            {
-                animator.SetFloat("Speed", agent.speed);
-                animator.SetBool("IsWalking", true);
+                chasingTarget = false;
             }
 
             if (agent.velocity == Vector3.zero)
             {
-                chasingTarget = false;
+                isMoving = false;
+            }
+            else
+            {
+                isMoving = true;
+            }
+
+            if (isMoving)
+            {
+                animator.SetFloat("Speed", agent.speed);
+                animator.SetBool("IsWalking", true);
             }
         }
     }
@@ -66,11 +88,12 @@ public class EnemyAI : MonoBehaviour
     private void EngageTarget()
     {
         FaceTarget();
-        if (distanceToTarget <= agent.stoppingDistance)
+
+        if (distanceToTarget <= meleeRange && hasMeleeAttack)
         {
             AttackTargetMelee();
         }
-        else if (distanceToTarget <= shootingRange)
+        else if (distanceToTarget <= shootingRange && hasRangedAttack && currentTargetIsVisible)
         {
             AttackTargetRanged();
         }
@@ -80,23 +103,118 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    void CheckTargets()
+    {
+        if (!health.GetIsAlive())
+        {
+            return;
+        }
+        currentTargetIsVisible = false;
+        Vector3 fieldOfViewPosition = transform.position + transform.up * 1.2f;
+        Collider[] targets = GetCollidersInView(fieldOfViewPosition, transform.forward, viewerToIgnore: this.gameObject);
+
+        Transform playerTarget;
+
+        if (targets.Length > 0)
+        {
+            for (int i = 0; i < targets.Length; i++)
+            {
+                if (targets[i].tag == "Player")
+                {
+                    playerTarget = targets[i].transform;
+                    currentTargetIsVisible = IsVisibleToThisFieldOfView(playerTarget, fieldOfViewPosition, transform.forward);
+                    return;
+                }
+            }
+        }
+    }
+
+    Collider[] GetCollidersInView(Vector3 position, Vector3 forward, GameObject viewerToIgnore = null)
+    {
+        List<Collider> colliders = Physics.OverlapSphere(position, fieldOfView.Radius).ToList();
+
+        foreach (Collider col in colliders.ToArray())
+        {
+            Transform target = col.transform;
+
+            Vector3 targetposition = target.position; targetposition.y = position.y;
+
+            Vector3 directionToTarget = (targetposition - position).normalized;
+
+            if (Vector3.Angle(forward, directionToTarget) > fieldOfView.Vector / 2 || col.gameObject == viewerToIgnore)
+            {
+                colliders.Remove(col);
+            }
+        }
+
+        return colliders.ToArray();
+    }
+
+    public bool IsVisibleToThisFieldOfView(Transform lookedTarget, Vector3 viewPosition, Vector3 viewForward, float threshold = 0.6f)
+    {
+        if (lookedTarget == null) return false;
+
+        bool CanSeeTarget = true;
+        Vector3 directionToTarget = (lookedTarget.position - viewPosition).normalized;
+
+        //CAN NOT see the target
+        if (Vector3.Angle(viewForward, directionToTarget) > fieldOfView.Vector / 2)
+        {
+            CanSeeTarget = false;
+        }
+        else
+        {
+            float normalDistance = Vector3.Distance(viewPosition, lookedTarget.position);
+            Vector3 lineCastEndPosition = viewPosition + directionToTarget * normalDistance;
+
+            RaycastHit hit;
+            Physics.Linecast(viewPosition, lineCastEndPosition, out hit);
+            if (hit.collider != null)
+            {
+                if (hit.collider.tag == "Player")
+                {
+                    CanSeeTarget = true;
+                }
+                else
+                {
+                    CanSeeTarget = false;
+                }
+            }
+        }
+        return CanSeeTarget;
+    }
+
     private void AttackTargetMelee()
     {
         animator.SetBool("IsMelee", true);
+        agent.isStopped = true;
         agent.ResetPath();
     }
 
     private void AttackTargetRanged()
     {
         animator.SetBool("IsShooting", true);
+        agent.isStopped = true;
         agent.ResetPath();
+    }
+
+    void OnDamageTaken()
+    {
+        if (Time.time >= stumbleDelay)
+        {
+            ResetAnims();
+            agent.ResetPath();
+            agent.isStopped = true;
+            animator.SetBool("Stumble", true);
+            isStumbling = true;
+            stumbleDelay = Time.time + stumbleGracePeriod;
+        }
+        isProvoked = true;
     }
 
     private void ChaseTarget()
     {
         agent.SetDestination(target.position);
-        animator.SetFloat("Speed", agent.speed);
-        animator.SetBool("IsWalking", true);
         chasingTarget = true;
     }
 
@@ -109,15 +227,25 @@ public class EnemyAI : MonoBehaviour
 
     private void ResetAnims()
     {
-        animator.SetBool("IsMelee", false);
-        animator.SetBool("IsShooting", false);
+        agent.isStopped = false;
+        animator.SetBool("Stumble", false);
+        isStumbling = false;
+        if (hasMeleeAttack)
+        {
+            animator.SetBool("IsMelee", false);
+        }
+        if (hasRangedAttack)
+        {
+            animator.SetBool("IsShooting", false);
+        }
         animator.SetBool("IsWalking", false);
+        isMoving = false;
         animator.SetFloat("Speed", 0);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, chaseRange);
+        Gizmos.DrawWireSphere(transform.position, fieldOfView.Radius);
     }
 }

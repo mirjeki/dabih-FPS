@@ -1,18 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI healthUI;
+    [SerializeField] Image bloodSpatter;
     [SerializeField] float maxHealth = 100f;
     [SerializeField] float currentHealth = 100f;
+    DeathHandler deathHandler;
+    float spatterFadeTime = 1f;
+    float spatterTimer;
 
     private void Start()
     {
         currentHealth = maxHealth;
-        healthUI.text = currentHealth.ToString();
+        healthUI.text = "HP: " + currentHealth.ToString();
+        deathHandler = GetComponent<DeathHandler>();
+    }
+
+    private void Update()
+    {
+        DisableSpatter();
+
+    }
+
+    private void DisableSpatter()
+    {
+        if (Time.time > spatterTimer)
+        {
+            bloodSpatter.enabled = false;
+        }
     }
 
     public float GetMaxHealth()
@@ -28,17 +49,23 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        healthUI.text = currentHealth.ToString();
+        healthUI.text = "HP: " + currentHealth.ToString();
+        bloodSpatter.enabled = true;
+        spatterTimer = Time.time + spatterFadeTime;
 
         if (currentHealth < 0f)
         {
-            Debug.Log("Game over!");
+            deathHandler.HandleDeath();
         }
     }
 
     public void GainHealth(float health)
     {
         currentHealth += health;
-        healthUI.text = currentHealth.ToString();
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        healthUI.text = "HP: " + currentHealth.ToString();
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -10,25 +12,52 @@ public class Weapon : MonoBehaviour
     [SerializeField] float rateOfFire = 0.1f;
     [SerializeField] float flashTimer = 0.05f;
     [SerializeField] GameObject hitEffect;
+    [SerializeField] Ammo ammo;
+    [SerializeField] AmmoType ammoType;
+    [SerializeField] TextMeshProUGUI ammoUI;
+    [SerializeField] WeaponEnum weaponType;
     private float nextCycle;
     MeshRenderer muzzleFlash;
+    Light muzzleFlashLight;
     private float deactivateTime = 0f;
+
 
     private void Start()
     {
         muzzleFlash = HelperMethods.GetChildGameObject(gameObject, "MuzzleFlash").GetComponent<MeshRenderer>();
+        muzzleFlashLight = muzzleFlash.GetComponentInChildren<Light>();
+        ammoUI.text = "Ammo: " + ammo.GetCurrentAmmo(ammoType).ToString();
+    }
+
+    public WeaponEnum GetWeaponType()
+    {
+        return weaponType;
     }
 
     public void Shoot(GameObject camera)
     {
-        if (Time.time > nextCycle)
+        if (Time.time > nextCycle && ammo.GetCurrentAmmo(ammoType) > 0)
         {
-            SetMuzzleFlash();
+            ToggleMuzzleFlash();
+
+            switch (GetWeaponType())
+            {
+                case WeaponEnum.Rifle:
+                    SoundManager.PlaySound(SoundAssets.instance.rifleShot, 0.75f);
+                    break;
+                case WeaponEnum.Shotgun:
+                    SoundManager.PlaySound(SoundAssets.instance.shotgunShot, 0.75f);
+                    break;
+                default:
+                    break;
+            }
+
 
             nextCycle = Time.time + rateOfFire;
             deactivateTime = Time.time + flashTimer;
 
             RaycastHit hit;
+            ammo.ReduceAmmo(ammoType);
             Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range);
 
             if (hit.transform != null)
@@ -37,9 +66,8 @@ public class Weapon : MonoBehaviour
                 EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
                 if (target != null)
                 {
-                    target.TakeDamage(damage);
+                    target.TakeDamage(damage, hit);
                 }
-                Debug.Log("Hit: " + hit.transform.name);
             }
         }
     }
@@ -57,13 +85,19 @@ public class Weapon : MonoBehaviour
         {
             if (Time.time > deactivateTime)
             {
-                SetMuzzleFlash();
+                ToggleMuzzleFlash();
             }
         }
     }
 
-    private void SetMuzzleFlash()
+    private void AmmoChanged()
+    {
+        ammoUI.text = "Ammo: " + ammo.GetCurrentAmmo(ammoType).ToString();
+    }
+
+    private void ToggleMuzzleFlash()
     {
         muzzleFlash.enabled = !muzzleFlash.enabled;
+        muzzleFlashLight.enabled = !muzzleFlashLight.enabled;
     }
 }

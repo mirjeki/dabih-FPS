@@ -6,7 +6,8 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float health = 100;
-    [SerializeField] float deathTimer = 4f;
+    [SerializeField] ParticleSystem bloodSplatter;
+    [SerializeField] ParticleSystem bloodGush;
     Animator animator;
     bool isAlive;
 
@@ -21,9 +22,26 @@ public class EnemyHealth : MonoBehaviour
         return isAlive;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, RaycastHit hit)
     {
+        BroadcastMessage("OnDamageTaken");
+
+        if (bloodSplatter  != null)
+        {
+            CreateBloodEffect(hit, bloodSplatter);
+        }
+        if (bloodGush != null)
+        {
+            CreateBloodEffect(hit, bloodGush);
+        }
         health -= damage;
+    }
+
+    private void CreateBloodEffect(RaycastHit hit, ParticleSystem effect)
+    {
+        ParticleSystem impactFX = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
+
+        Destroy(impactFX, 0.1f);
     }
 
     void Update()
@@ -36,15 +54,14 @@ public class EnemyHealth : MonoBehaviour
         if (isAlive && health <= 0) 
         {
             isAlive = false;
-            StartCoroutine(Die());
+            Die();
         }
     }
 
-    private IEnumerator Die()
+    private void Die()
     {
-        yield return new WaitForSecondsRealtime(deathTimer);
-
         animator.SetTrigger("Die");
+        transform.GetComponent<CapsuleCollider>().enabled = false;
         //Destroy(gameObject);
     }
 }

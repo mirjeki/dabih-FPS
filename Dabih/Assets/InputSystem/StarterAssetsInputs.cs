@@ -14,6 +14,9 @@ namespace StarterAssets
         public bool jump;
         public bool sprint;
         public bool fire;
+        public bool zoom;
+        public bool weaponChange;
+        public WeaponEnum weaponSelection;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -50,6 +53,21 @@ namespace StarterAssets
         {
             FireInput(value.isPressed);
         }
+
+        public void OnZoom(InputValue value)
+        {
+            ZoomInput(value.isPressed);
+        }
+
+        public void OnRifleSelect(InputValue value)
+        {
+            WeaponSelectInput(value.isPressed, WeaponEnum.Rifle);
+        }
+
+        public void OnShotgunSelect(InputValue value)
+        {
+            WeaponSelectInput(value.isPressed, WeaponEnum.Shotgun);
+        }
 #endif
 
 
@@ -76,6 +94,17 @@ namespace StarterAssets
         private void FireInput(bool isPressed)
         {
             fire = isPressed;
+        }
+
+        private void ZoomInput(bool isPressed)
+        {
+            zoom = isPressed;
+        }
+
+        private void WeaponSelectInput(bool isPressed, WeaponEnum weapon)
+        {
+            weaponChange = isPressed;
+            weaponSelection = weapon;
         }
 
         private void OnApplicationFocus(bool hasFocus)
