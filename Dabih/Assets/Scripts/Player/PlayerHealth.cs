@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        healthUI.text = "HP: " + currentHealth.ToString();
+        healthUI.text = currentHealth.ToString();
         deathHandler = GetComponent<DeathHandler>();
     }
 
@@ -49,11 +49,16 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        healthUI.text = "HP: " + currentHealth.ToString();
+        healthUI.text = currentHealth.ToString();
         bloodSpatter.enabled = true;
-        spatterTimer = Time.time + spatterFadeTime;
 
-        if (currentHealth < 0f)
+        if (Time.time > spatterTimer)
+        {
+            spatterTimer = Time.time + spatterFadeTime;
+            SoundManager.PlaySound(SoundAssets.instance.hurt, 0.5f);
+        }
+
+        if (currentHealth <= 0f)
         {
             deathHandler.HandleDeath();
         }
@@ -66,6 +71,6 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-        healthUI.text = "HP: " + currentHealth.ToString();
+        healthUI.text = currentHealth.ToString();
     }
 }

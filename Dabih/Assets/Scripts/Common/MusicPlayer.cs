@@ -15,28 +15,28 @@ public class MusicPlayer : MonoBehaviour
 
     void Start()
     {
-        float beginPlaying = Time.time + delayOnStart;
-
-        if (playOnStart && Time.time > beginPlaying)
+        if (playOnStart)
         {
-            ShuffleMusicTracks();
+            Invoke("PlayTracklist", delayOnStart);
         }
     }
 
-    private void ShuffleMusicTracks()
+    void PlayTracklist()
+    {
+        StartCoroutine(ShuffleMusicTracks());
+    }
+
+    private IEnumerator ShuffleMusicTracks()
     {
         trackList.Shuffle();
 
+        float beginPlaying = Time.time + delayOnStart;
+
         foreach (var track in trackList)
         {
-            StartCoroutine(PlayTrack(track));
+            SoundManager.PlaySound(track, volume);
+
+            yield return new WaitForSeconds(delayBetweenTracks + track.length);
         }
-    }
-
-    private IEnumerator PlayTrack(AudioClip track)
-    {
-        SoundManager.PlaySound(track, volume);
-
-        yield return new WaitForSecondsRealtime(delayBetweenTracks);
     }
 }

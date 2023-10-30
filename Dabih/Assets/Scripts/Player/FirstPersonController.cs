@@ -61,6 +61,19 @@ namespace StarterAssets
         [SerializeField] float footstepDelay = 0.05f;
         private float nextCycle;
 
+        public bool IsPaused
+        {
+            get { return isPaused; }
+            set { isPaused = value; }
+        }
+
+        public bool IsUsing
+        {
+            get { return isUsing; }
+            set { isUsing = value; }
+        }
+
+
         // cinemachine
         private float _cinemachineTargetPitch;
 
@@ -69,6 +82,8 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private bool isUsing;
+        private bool isPaused;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -77,6 +92,7 @@ namespace StarterAssets
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
+        private PauseHandler _pauseHandler;
 #endif
         private CharacterController _controller;
         private StarterAssetsInputs _input;
@@ -118,6 +134,7 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
+            _pauseHandler = GetComponent<PauseHandler>();
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -125,16 +142,41 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            isPaused = false;
         }
 
         private void Update()
         {
-            JumpAndGravity();
-            WeaponChange();
-            Fire();
-            GroundedCheck();
-            Move();
-            Zoom();
+            if (!isPaused)
+            {
+                JumpAndGravity();
+                WeaponChange();
+                Fire();
+                GroundedCheck();
+                Move();
+                Zoom();
+                CameraRotation();
+                Use();
+            }
+            Pause();
+        }
+
+        private void Pause()
+        {
+            if (_input.pause)
+            {
+                TogglePause();
+            }
+        }
+
+        public void TogglePause()
+        {
+            if (_pauseHandler != null)
+            {
+                isPaused = _pauseHandler.HandlePause();
+                _input.pause = false;
+                _input.jump = false;
+            }
         }
 
         private void Zoom()
@@ -168,7 +210,10 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            CameraRotation();
+            //if (!isPaused)
+            //{
+            //    CameraRotation();
+            //}
         }
 
         private void GroundedCheck()
@@ -242,7 +287,7 @@ namespace StarterAssets
                 // move
                 inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
 
-                if (Time.time > nextCycle)
+                if (Time.time > nextCycle && Grounded)
                 {
                     nextCycle = Time.time + footstepDelay;
                     SoundManager.PlaySound(SoundAssets.instance.footstep, 0.5f);
@@ -272,6 +317,8 @@ namespace StarterAssets
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
+                    SoundManager.PlaySound(SoundAssets.instance.jump, 0.2f);
                 }
 
                 // jump timeout
@@ -299,6 +346,19 @@ namespace StarterAssets
             if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
+            }
+        }
+
+        private void Use()
+        {
+            if (_input.use)
+            {
+                isUsing = true;
+                _input.use = false;
+            }
+            else
+            {
+                isUsing = false;
             }
         }
 

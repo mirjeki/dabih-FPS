@@ -17,6 +17,8 @@ namespace StarterAssets
         public bool zoom;
         public bool weaponChange;
         public WeaponEnum weaponSelection;
+        public bool pause;
+        public bool use;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -68,6 +70,16 @@ namespace StarterAssets
         {
             WeaponSelectInput(value.isPressed, WeaponEnum.Shotgun);
         }
+
+        public void OnPause(InputValue value)
+        {
+            PauseInput(value.isPressed);
+        }
+
+        public void OnUse(InputValue value)
+        {
+            UseInput(value.isPressed);
+        }
 #endif
 
 
@@ -105,6 +117,16 @@ namespace StarterAssets
         {
             weaponChange = isPressed;
             weaponSelection = weapon;
+        }
+
+        private void PauseInput(bool isPressed)
+        {
+            pause = isPressed;
+        }
+
+        private void UseInput(bool isPressed)
+        {
+            use = isPressed;
         }
 
         private void OnApplicationFocus(bool hasFocus)

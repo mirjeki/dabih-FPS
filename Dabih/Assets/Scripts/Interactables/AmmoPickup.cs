@@ -10,6 +10,7 @@ public class AmmoPickup : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            SoundManager.PlaySound(SoundAssets.instance.ammo, 0.6f);
             other.GetComponent<Ammo>().ModifyAmmoAmount(ammoAmount, ammoType);
             Destroy(gameObject);
         }

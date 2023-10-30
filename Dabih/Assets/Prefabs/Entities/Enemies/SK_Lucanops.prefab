@@ -1030,7 +1030,7 @@ Transform:
   - {fileID: 4558874567174680}
   - {fileID: 4046677311122024}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &95420888192726044
 Animator:
@@ -1065,6 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 105629eb26aa29e44aef8f3a7a8097e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 1
   turnSpeed: 12
   chaseRange: 30
   meleeRange: 6
@@ -1075,6 +1076,9 @@ MonoBehaviour:
   fieldOfView:
     Radius: 35
     Vector: 120
+  footstepDelay: 0.5
+  attackDelay: 1
+  hurtDelay: 0.2
 --- !u!114 &2732306573985374664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,6 +1093,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeDamage: 40
   rangedDamage: 0
+  rangedAttackMissChance: 33.3
+  flashTimer: 0.05
+  hasMuzzleFlash: 0
 --- !u!114 &2367995176757229298
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    [SerializeField] EnemyType enemyType;
     [SerializeField] float turnSpeed = 5f;
     [SerializeField] float chaseRange = 5f;
     [SerializeField] float meleeRange = 6f;
@@ -15,6 +16,11 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] bool hasMeleeAttack;
     [SerializeField] float stumbleGracePeriod = 0.5f;
     [SerializeField] FieldOfView fieldOfView = new FieldOfView(20f, 60f);
+
+    [Header("Audio")]
+    [SerializeField] float footstepDelay = 0.2f;
+    [SerializeField] float attackDelay = 0.2f;
+    [SerializeField] float hurtDelay = 0.2f;
 
     Transform target;
     bool currentTargetIsVisible;
@@ -27,6 +33,9 @@ public class EnemyAI : MonoBehaviour
     bool isProvoked;
     bool isMoving;
     bool isStumbling;
+    private float nextStepCycle;
+    private float nextAttackCycle;
+    private float nextHurtCycle;
 
     void Start()
     {
@@ -79,6 +88,22 @@ public class EnemyAI : MonoBehaviour
 
             if (isMoving)
             {
+                if (Time.time > nextStepCycle)
+                {
+                    nextStepCycle = Time.time + footstepDelay;
+
+                    switch (enemyType)
+                    {
+                        case EnemyType.Alien:
+                            SoundManager.PlaySound(SoundAssets.instance.alienWalk, 0.25f);
+                            break;
+                        case EnemyType.Dog:
+                            SoundManager.PlaySound(SoundAssets.instance.dogWalk, 0.25f);
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 animator.SetFloat("Speed", agent.speed);
                 animator.SetBool("IsWalking", true);
             }
@@ -187,6 +212,21 @@ public class EnemyAI : MonoBehaviour
     private void AttackTargetMelee()
     {
         animator.SetBool("IsMelee", true);
+        if (Time.time > nextAttackCycle)
+        {
+            nextAttackCycle = Time.time + attackDelay;
+            switch (enemyType)
+            {
+                case EnemyType.Alien:
+                    SoundManager.PlaySound(SoundAssets.instance.alienKick, 0.5f);
+                    break;
+                case EnemyType.Dog:
+                    SoundManager.PlaySound(SoundAssets.instance.dogBite, 0.5f);
+                    break;
+                default:
+                    break;
+            }
+        }
         agent.isStopped = true;
         agent.ResetPath();
     }
@@ -194,6 +234,20 @@ public class EnemyAI : MonoBehaviour
     private void AttackTargetRanged()
     {
         animator.SetBool("IsShooting", true);
+        if (Time.time > nextAttackCycle)
+        {
+            nextAttackCycle = Time.time + attackDelay;
+            switch (enemyType)
+            {
+                case EnemyType.Alien:
+                    SoundManager.PlaySound(SoundAssets.instance.alienShot, 0.5f);
+                    break;
+                case EnemyType.Dog:
+                    break;
+                default:
+                    break;
+            }
+        }
         agent.isStopped = true;
         agent.ResetPath();
     }
@@ -208,6 +262,21 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("Stumble", true);
             isStumbling = true;
             stumbleDelay = Time.time + stumbleGracePeriod;
+            if (Time.time > nextHurtCycle)
+            {
+                nextAttackCycle = Time.time + hurtDelay;
+                switch (enemyType)
+                {
+                    case EnemyType.Alien:
+                        SoundManager.PlaySound(SoundAssets.instance.alienHurt, 0.5f);
+                        break;
+                    case EnemyType.Dog:
+                        SoundManager.PlaySound(SoundAssets.instance.dogHurt, 0.5f);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         isProvoked = true;
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject hitEffect;
     [SerializeField] Ammo ammo;
     [SerializeField] AmmoType ammoType;
+    [SerializeField] Image ammoIcon;
     [SerializeField] TextMeshProUGUI ammoUI;
     [SerializeField] WeaponEnum weaponType;
     private float nextCycle;
@@ -26,7 +28,8 @@ public class Weapon : MonoBehaviour
     {
         muzzleFlash = HelperMethods.GetChildGameObject(gameObject, "MuzzleFlash").GetComponent<MeshRenderer>();
         muzzleFlashLight = muzzleFlash.GetComponentInChildren<Light>();
-        ammoUI.text = "Ammo: " + ammo.GetCurrentAmmo(ammoType).ToString();
+        ammoIcon.enabled = true;
+        ammoUI.text = ammo.GetCurrentAmmo(ammoType).ToString();
     }
 
     public WeaponEnum GetWeaponType()
@@ -92,12 +95,21 @@ public class Weapon : MonoBehaviour
 
     private void AmmoChanged()
     {
-        ammoUI.text = "Ammo: " + ammo.GetCurrentAmmo(ammoType).ToString();
+        ammoUI.text = ammo.GetCurrentAmmo(ammoType).ToString();
+        ammoIcon.enabled = true;
     }
 
     private void ToggleMuzzleFlash()
     {
         muzzleFlash.enabled = !muzzleFlash.enabled;
         muzzleFlashLight.enabled = !muzzleFlashLight.enabled;
+    }
+
+    private void OnDisable()
+    {
+        if (ammoIcon != null)
+        {
+            ammoIcon.enabled = false;
+        }
     }
 }

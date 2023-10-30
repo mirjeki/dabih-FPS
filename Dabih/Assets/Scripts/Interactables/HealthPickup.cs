@@ -12,6 +12,7 @@ public class HealthPickup : MonoBehaviour
             var playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth.GetCurrentHealth() < playerHealth.GetMaxHealth())
             {
+                SoundManager.PlaySound(SoundAssets.instance.medkit, 0.6f);
                 other.GetComponent<PlayerHealth>().GainHealth(healAmount);
                 Destroy(gameObject);
             }

@@ -2889,7 +2889,7 @@ Transform:
   - {fileID: 6936187530168452420}
   - {fileID: 1714453159785332288}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: -154.347, z: 0}
 --- !u!95 &5641821752726868926
 Animator:
@@ -2926,6 +2926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeDamage: 20
   rangedDamage: 3
+  rangedAttackMissChance: 33.3
   flashTimer: 0.05
   hasMuzzleFlash: 1
 --- !u!114 &6086824179508081304
@@ -2955,16 +2956,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 105629eb26aa29e44aef8f3a7a8097e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
   turnSpeed: 5
   chaseRange: 30
-  meleeRange: 30
+  meleeRange: 2
   shootingRange: 20
   hasRangedAttack: 1
   hasMeleeAttack: 1
   stumbleGracePeriod: 0.5
   fieldOfView:
     Radius: 30
-    Vector: 120
+    Vector: 75
+  footstepDelay: 0.5
+  attackDelay: 0.5
+  hurtDelay: 0.2
 --- !u!195 &5791882584031085168
 NavMeshAgent:
   m_ObjectHideFlags: 0
