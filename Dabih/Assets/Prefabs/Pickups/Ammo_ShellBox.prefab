@@ -78,6 +78,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7d0e2e734e3e6094fa165f5e4e131eb3, type: 3}
       insertIndex: -1
       addedObject: {fileID: -692425589361996634}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7d0e2e734e3e6094fa165f5e4e131eb3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1931995247075197858}
   m_SourcePrefab: {fileID: 100100000, guid: 7d0e2e734e3e6094fa165f5e4e131eb3, type: 3}
 --- !u!1 &6490412089013218258 stripped
 GameObject:
@@ -119,3 +122,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoType: 1
   ammoAmount: 5
+--- !u!114 &1931995247075197858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6490412089013218258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be90dcfe115a4b4fb625ed835eeeb06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguesToDisplay: 02000000
+  dialogueTag: 
+  triggerEnter: 0
+  missionTextToDisplay: 
+  tutorialTextToDisplay: 
+  popupTextToDisplay: +5 Shells
+  onMissionTextChanged: {fileID: 0}
+  onTutorialTextChanged: {fileID: 0}
+  onPopupTextChanged: {fileID: 11400000, guid: aa6d0d2e96d8f1e43ba588d1414d5453, type: 2}

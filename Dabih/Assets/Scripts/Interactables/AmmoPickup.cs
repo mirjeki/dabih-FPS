@@ -8,10 +8,15 @@ public class AmmoPickup : MonoBehaviour
     [SerializeField] int ammoAmount = 5;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.transform.root.tag == CommonStrings.playerString)
         {
-            SoundManager.PlaySound(SoundAssets.instance.ammo, 0.6f);
+            SoundManager.PlaySound(SoundAssets.instance.ammo, 0.25f);
             other.GetComponent<Ammo>().ModifyAmmoAmount(ammoAmount, ammoType);
+            var dialogueTrigger = GetComponent<DialogueTrigger>();
+            if (dialogueTrigger != null)
+            {
+                dialogueTrigger.Use();
+            }
             Destroy(gameObject);
         }
     }

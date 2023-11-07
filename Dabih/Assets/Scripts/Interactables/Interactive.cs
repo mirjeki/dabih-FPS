@@ -7,25 +7,39 @@ using UnityEngine.UIElements;
 
 public class Interactive : MonoBehaviour
 {
-    [SerializeField] string itemDescription;
+    [SerializeField] InteractiveType interactiveType;
+    [SerializeField] string interactiveTag;
     [SerializeField] bool pickUp;
-    [SerializeField] private GameObject buttonUI;
+    [SerializeField] bool disabled;
+    [SerializeField] private GameObject selectUI;
     private bool canUse;
+    Button button;
     InventoryItem inventoryItem;
     FirstPersonController firstPersonController;
     GameObject mainCamera;
+    DialogueTrigger dialogueTrigger;
+    MissionEventTrigger missionEventTrigger;
 
     //the entity in proximity to the interactive
     Collider actor;
 
-    private const string playerString = "Player";
-
     private void Start()
     {
-        if (pickUp)
+        switch (interactiveType)
         {
-            inventoryItem = GetComponent<InventoryItem>();
+            case InteractiveType.Button:
+                button = GetComponent<Button>();
+                break;
+            case InteractiveType.Pickup:
+                inventoryItem = GetComponent<InventoryItem>();
+                break;
+            default:
+                break;
         }
+
+        dialogueTrigger = GetComponent<DialogueTrigger>();
+        missionEventTrigger = GetComponent<MissionEventTrigger>();
+
         firstPersonController = FindObjectOfType<FirstPersonController>();
 
         if (mainCamera == null)
@@ -36,43 +50,81 @@ public class Interactive : MonoBehaviour
 
     private void Update()
     {
-        if (firstPersonController.IsUsing)
+        if (firstPersonController.IsUsing && canUse)
         {
             UseInteractive();
         }
     }
 
-
-    public string GetItemDescription()
+    public string GetInteractiveTag()
     {
-        return itemDescription;
+        return interactiveTag;
+    }
+
+    public void SetInteractiveTag(string newTag)
+    {
+        interactiveTag = newTag;
+    }
+
+    public bool GetDisabled()
+    {
+        return disabled;
+    }
+
+    public void SetDisabled(bool newValue)
+    {
+        disabled = newValue;
     }
 
     private void UseInteractive()
     {
-        if (!canUse)
+        if (dialogueTrigger != null)
         {
-            return;
+            dialogueTrigger.Use();
+        }
+        if (missionEventTrigger != null)
+        {
+            missionEventTrigger.Use();
         }
 
-        if (pickUp)
+        switch (interactiveType)
         {
-            actor.GetComponent<Inventory>().SetInventoryItem(inventoryItem);
-            Destroy(gameObject);
+            case InteractiveType.Button:
+                UseButton();
+                break;
+            case InteractiveType.Pickup:
+                actor.GetComponent<Inventory>().SetInventoryItem(inventoryItem);
+                Destroy(gameObject);
+                break;
+            default:
+                break;
         }
-        else
+    }
+
+    private void UseButton()
+    {
+        if (button.GetButtonType() == ButtonType.UseOnce)
         {
-            Debug.Log($"{transform.name} used");
+            disabled = true;
+            selectUI.SetActive(false);
+            canUse = false;
         }
+
+        button.UseButton();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        actor = other;
-        if (other.transform.root.tag == playerString)
+        if (disabled)
         {
-            transform.forward = mainCamera.transform.forward;
-            buttonUI.SetActive(true);
+            return;
+        }
+
+        actor = other;
+        if (other.transform.root.tag == CommonStrings.playerString)
+        {
+            //transform.forward = mainCamera.transform.forward;
+            selectUI.SetActive(true);
             canUse = true;
         }
     }
@@ -80,9 +132,9 @@ public class Interactive : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         actor = null;
-        if (other.transform.root.tag == playerString)
+        if (other.transform.root.tag == CommonStrings.playerString)
         {
-            buttonUI.SetActive(false);
+            selectUI.SetActive(false);
             canUse = false;
         }
     }

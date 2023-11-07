@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -37,6 +38,8 @@ namespace StarterAssets
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
         public bool Grounded = true;
+        [Tooltip("Current layer")]
+        public LayerMask CurrentLayer;
         [Tooltip("Useful for rough ground")]
         public float GroundedOffset = -0.14f;
         [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
@@ -58,7 +61,7 @@ namespace StarterAssets
         WeaponZoom weaponZoom;
 
         [Header("Audio")]
-        [SerializeField] float footstepDelay = 0.05f;
+        [SerializeField] float footstepDelay = 0.06f;
         private float nextCycle;
 
         public bool IsPaused
@@ -152,7 +155,7 @@ namespace StarterAssets
                 JumpAndGravity();
                 WeaponChange();
                 Fire();
-                GroundedCheck();
+                CurrentLayer = GroundedCheck();
                 Move();
                 Zoom();
                 CameraRotation();
@@ -216,11 +219,28 @@ namespace StarterAssets
             //}
         }
 
-        private void GroundedCheck()
+        private LayerMask GroundedCheck()
         {
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+
+            if (Physics.CheckSphere(spherePosition, GroundedRadius, LayerMask.GetMask(CommonStrings.GroundGravel), QueryTriggerInteraction.Ignore))
+            {
+                return LayerMask.GetMask(CommonStrings.GroundGravel);
+            }
+            else if (Physics.CheckSphere(spherePosition, GroundedRadius, LayerMask.GetMask(CommonStrings.GroundPlating), QueryTriggerInteraction.Ignore))
+            {
+                return LayerMask.GetMask(CommonStrings.GroundPlating);
+            }
+            else if (Physics.CheckSphere(spherePosition, GroundedRadius, LayerMask.GetMask(CommonStrings.GroundDefault), QueryTriggerInteraction.Ignore))
+            {
+                return LayerMask.GetMask(CommonStrings.GroundDefault);
+            }
+            else
+            {
+                return new LayerMask();
+            }
         }
 
         private void CameraRotation()
@@ -290,7 +310,20 @@ namespace StarterAssets
                 if (Time.time > nextCycle && Grounded)
                 {
                     nextCycle = Time.time + footstepDelay;
-                    SoundManager.PlaySound(SoundAssets.instance.footstep, 0.5f);
+
+                    if (CurrentLayer == LayerMask.GetMask(CommonStrings.GroundGravel))
+                    {
+                        SoundManager.PlaySound(SoundAssets.instance.footstepGravel, 0.5f);
+                    }
+                    else if (CurrentLayer == LayerMask.GetMask(CommonStrings.GroundPlating))
+                    {
+                        SoundManager.PlaySound(SoundAssets.instance.footstepPlating, 0.5f);
+                    }
+                    else
+                    {
+                        SoundManager.PlaySound(SoundAssets.instance.footstepDefault, 0.5f);
+                    }
+
                 }
             }
 
@@ -315,10 +348,14 @@ namespace StarterAssets
                 // Jump
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
+                    if (_verticalVelocity < 0.0f)
+                    {
+                        SoundManager.PlaySound(SoundAssets.instance.jump, 0.1f);
+                    }
+
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
-                    SoundManager.PlaySound(SoundAssets.instance.jump, 0.2f);
                 }
 
                 // jump timeout

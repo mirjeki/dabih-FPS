@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] bool menuOnly;
     [SerializeField] Object level;
+    [SerializeField] Object winScreen;
     FirstPersonController firstPersonController;
 
     private void Start()
@@ -21,10 +22,9 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        //Unity error: doesn't load from the level name in Build (needs investigating)
-        //SceneManager.LoadScene(level.name);
+        //SceneManager.LoadScene(level.name.Replace(" ", string.Empty));
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("FacilityAssault");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -49,6 +49,15 @@ public class MenuManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void WinGame()
+    {
+        //SceneManager.LoadScene(winScreen.name.Replace(" ", string.Empty));
+        SceneManager.LoadScene("WinScreen");
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void QuitGame()

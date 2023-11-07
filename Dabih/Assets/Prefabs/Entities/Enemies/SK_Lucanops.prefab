@@ -1077,7 +1077,6 @@ MonoBehaviour:
     Radius: 35
     Vector: 120
   footstepDelay: 0.5
-  attackDelay: 1
   hurtDelay: 0.2
 --- !u!114 &2732306573985374664
 MonoBehaviour:
@@ -1095,6 +1094,7 @@ MonoBehaviour:
   rangedDamage: 0
   rangedAttackMissChance: 33.3
   flashTimer: 0.05
+  attackDelay: 0.2
   hasMuzzleFlash: 0
 --- !u!114 &2367995176757229298
 MonoBehaviour:
@@ -1108,7 +1108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe00104148d5dd4f9caf76248d9d4b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 120
+  health: 85
   bloodSplatter: {fileID: 23855692464663782, guid: eb6314c0a1e6b8846af04b5f0e4e4716, type: 3}
   bloodGush: {fileID: 23855692464663782, guid: 218e44fa0e1db3147a0d5db3dc722a0a, type: 3}
 --- !u!195 &5852147258451392931

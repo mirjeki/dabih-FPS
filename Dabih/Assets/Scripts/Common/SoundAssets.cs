@@ -21,7 +21,9 @@ public class SoundAssets : MonoBehaviour
     [Header("Player Audio")]
     public AudioClip rifleShot;
     public AudioClip shotgunShot;
-    public AudioClip footstep;
+    public AudioClip footstepGravel;
+    public AudioClip footstepPlating;
+    public AudioClip footstepDefault;
     public AudioClip jump;
     public AudioClip hurt;
 
@@ -32,6 +34,7 @@ public class SoundAssets : MonoBehaviour
     [Header("Environment")]
     public AudioClip computer;
     public AudioClip generator;
+    public AudioClip button;
 
     [Header("Enemy Audio")]
     public AudioClip dogBite;

@@ -46,13 +46,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rifleShot: {fileID: 8300000, guid: 6901b144e2c34b34b9e96654b9d9452b, type: 3}
   shotgunShot: {fileID: 8300000, guid: 4b09b945c30b53445abb9bd8e3fb8c22, type: 3}
-  footstep: {fileID: 8300000, guid: 61f9d76b6eaca044e9792ba8641cd1c6, type: 3}
-  jump: {fileID: 8300000, guid: b91711ce419ec594bb1d677d7775795b, type: 3}
+  footstepGravel: {fileID: 8300000, guid: fbe5efbcc2349574c9dc2acf88f199c9, type: 3}
+  footstepPlating: {fileID: 8300000, guid: 8f385b56c1683c34e998ae433408f8f8, type: 3}
+  footstepDefault: {fileID: 8300000, guid: d9a50401294cf994db997588f91d42e3, type: 3}
+  jump: {fileID: 8300000, guid: d9277eefa5508d64192b0ccca0f22344, type: 3}
   hurt: {fileID: 8300000, guid: 5624ebbb9e0ee1444b6ced508af447a6, type: 3}
   ammo: {fileID: 8300000, guid: 307a1cb3d9b3aa64ca79493e3b1cdcc4, type: 3}
   medkit: {fileID: 8300000, guid: 30006f020c56e95499558fbb56963114, type: 3}
   computer: {fileID: 0}
   generator: {fileID: 8300000, guid: 77b5a893952dc434ebeacf6c71217244, type: 3}
+  button: {fileID: 8300000, guid: 193d613fc3f4e604abe1c9a1458679a4, type: 3}
   dogBite: {fileID: 8300000, guid: 6d20ebf2f4a1be9469b1f2f57e19fc39, type: 3}
   dogHurt: {fileID: 8300000, guid: 6d79e17c1a9ae7349b3fdbb3ebc112e0, type: 3}
   dogWalk: {fileID: 8300000, guid: b289697accf11334ab06cb859bde4e21, type: 3}

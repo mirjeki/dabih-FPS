@@ -46,10 +46,10 @@ public class Weapon : MonoBehaviour
             switch (GetWeaponType())
             {
                 case WeaponEnum.Rifle:
-                    SoundManager.PlaySound(SoundAssets.instance.rifleShot, 0.75f);
+                    SoundManager.PlaySound(SoundAssets.instance.rifleShot, 0.26f);
                     break;
                 case WeaponEnum.Shotgun:
-                    SoundManager.PlaySound(SoundAssets.instance.shotgunShot, 0.75f);
+                    SoundManager.PlaySound(SoundAssets.instance.shotgunShot, 0.32f);
                     break;
                 default:
                     break;

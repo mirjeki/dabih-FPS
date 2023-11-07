@@ -41,6 +41,8 @@ public class EnemyHealth : MonoBehaviour
     {
         ParticleSystem impactFX = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
 
+        impactFX.transform.parent = FindObjectOfType<Cleanup>().transform;
+
         Destroy(impactFX, 0.1f);
     }
 

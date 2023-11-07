@@ -19,7 +19,6 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] float footstepDelay = 0.2f;
-    [SerializeField] float attackDelay = 0.2f;
     [SerializeField] float hurtDelay = 0.2f;
 
     Transform target;
@@ -34,7 +33,6 @@ public class EnemyAI : MonoBehaviour
     bool isMoving;
     bool isStumbling;
     private float nextStepCycle;
-    private float nextAttackCycle;
     private float nextHurtCycle;
 
     void Start()
@@ -108,6 +106,11 @@ public class EnemyAI : MonoBehaviour
                 animator.SetBool("IsWalking", true);
             }
         }
+    }
+
+    public EnemyType GetEnemyType()
+    {
+        return enemyType;
     }
 
     private void EngageTarget()
@@ -212,21 +215,6 @@ public class EnemyAI : MonoBehaviour
     private void AttackTargetMelee()
     {
         animator.SetBool("IsMelee", true);
-        if (Time.time > nextAttackCycle)
-        {
-            nextAttackCycle = Time.time + attackDelay;
-            switch (enemyType)
-            {
-                case EnemyType.Alien:
-                    SoundManager.PlaySound(SoundAssets.instance.alienKick, 0.5f);
-                    break;
-                case EnemyType.Dog:
-                    SoundManager.PlaySound(SoundAssets.instance.dogBite, 0.5f);
-                    break;
-                default:
-                    break;
-            }
-        }
         agent.isStopped = true;
         agent.ResetPath();
     }
@@ -234,20 +222,6 @@ public class EnemyAI : MonoBehaviour
     private void AttackTargetRanged()
     {
         animator.SetBool("IsShooting", true);
-        if (Time.time > nextAttackCycle)
-        {
-            nextAttackCycle = Time.time + attackDelay;
-            switch (enemyType)
-            {
-                case EnemyType.Alien:
-                    SoundManager.PlaySound(SoundAssets.instance.alienShot, 0.5f);
-                    break;
-                case EnemyType.Dog:
-                    break;
-                default:
-                    break;
-            }
-        }
         agent.isStopped = true;
         agent.ResetPath();
     }
@@ -264,7 +238,7 @@ public class EnemyAI : MonoBehaviour
             stumbleDelay = Time.time + stumbleGracePeriod;
             if (Time.time > nextHurtCycle)
             {
-                nextAttackCycle = Time.time + hurtDelay;
+                nextHurtCycle = Time.time + hurtDelay;
                 switch (enemyType)
                 {
                     case EnemyType.Alien:
